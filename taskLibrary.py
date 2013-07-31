@@ -18,12 +18,16 @@ class backgroundTaskLauncher:
         self.processes = processes
         self.toggle = False
 
-        for i in range(0,self.processes):
-            Process(target=self.taskLauncher, args=()).start()
+    def modify(self, chunkSize, chunkAmount, interchunkGap):
+        self.toggle = False
+        self.chunkSize = chunkSize
+        self.chunkAmount = chunkAmount
+        self.interchunkGap = interchunkGap
 
     def taskLauncher(self):
         while self.toggle:
-            Thread(target=task, args=()).start()
+            for i in range(0,self.chunkAmount):
+                Thread(target=task, args=()).start()
             sleep(self.interchunkGap*random.random()*2)
 
     def start(self):
@@ -31,6 +35,8 @@ class backgroundTaskLauncher:
 
     def stop(self):
         self.toggle = False
+
+
 
 class probeTaskLauncher:
     pass
