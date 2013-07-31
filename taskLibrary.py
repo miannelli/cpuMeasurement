@@ -4,6 +4,11 @@ import random
 from multiprocessing import Process, Manager
 
 
+def task(taskSize):
+    a = 0;
+    for i in range(1,taskSize):
+        a+=1
+
 
 class backgroundTaskLauncher:
     def __init__(self, chunkSize, chunkAmount, interchunkGap, processes):
@@ -11,16 +16,21 @@ class backgroundTaskLauncher:
         self.chunkAmount = chunkAmount
         self.interchunkGap = interchunkGap
         self.processes = processes
-        self.toggle = True
+        self.toggle = False
 
-    def start(self):
         for i in range(0,self.processes):
             Process(target=self.taskLauncher, args=()).start()
 
-    def taskLauncher:
-        pass
+    def taskLauncher(self):
+        while self.toggle:
+            Thread(target=task, args=()).start()
+            sleep(self.interchunkGap*random.random()*2)
 
-
+    def start(self):
+        self.toggle = True
 
     def stop(self):
-        pass
+        self.toggle = False
+
+class probeTaskLauncher:
+    pass
