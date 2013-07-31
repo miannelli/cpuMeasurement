@@ -11,15 +11,16 @@ class backgroundTaskLauncher:
         self.chunkAmount = chunkAmount
         self.interchunkGap = interchunkGap
         self.processes = processes
+        self.toggle = True
 
     def start(self):
         for i in range(0,self.processes):
-            pass
+            Process(target=self.taskLauncher, args=()).start()
+
+    def taskLauncher:
+        pass
+
+
 
     def stop(self):
         pass
-
-a = [1,2,3]
-b = [1,2,3]
-
-plot(a,b)
